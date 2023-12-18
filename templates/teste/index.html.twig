@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Página de teste {% endblock %}
+
+{% block body %}
+ {{ nome }}
+
+
+
+ <p> Percorrer frutas</p>
+ {% for fruta in lista %}
+    <table style="width:100%" border:1px solid black;>
+        <tr>
+            <td>{{fruta.nome}} {{fruta.valor}}</td>
+        <tr>
+    </table>
+    
+ {% endfor %}
+{% endblock %}

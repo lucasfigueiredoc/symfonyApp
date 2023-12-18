@@ -10,6 +10,8 @@ hello:
     path: /hello
     controller: App\Controller\HelloController::index
 
+
+
 teste: 
     path: /testeapp
     controller: App\Controller\TesteController::index
