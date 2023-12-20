@@ -14,7 +14,6 @@ use App\Repository\CursoRepository;
 class CursoController extends AbstractController
 
 {
-
     #[Route('/curso', name: 'curso_index')]
     public function index(CursoRepository $cursoRepository): Response{
 

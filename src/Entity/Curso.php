@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: CursoRepository::class)]
 class Curso
 {
@@ -16,13 +18,17 @@ class Curso
     #[ORM\Column]
     private ?int $id = null;
 
+    
     #[ORM\Column(length: 50)]
     private ?string $nomecurso = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?int $duracaocursomeses = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $datapublicacao = null;
 
     #[ORM\OneToMany(mappedBy: 'Curso', targetEntity: Aluno::class)]

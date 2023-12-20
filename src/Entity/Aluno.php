@@ -6,6 +6,10 @@ use App\Repository\AlunoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: AlunoRepository::class)]
 class Aluno
 {
@@ -15,15 +19,20 @@ class Aluno
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
     private ?string $nome = null;
-
+    
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dtnascimento = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?string $telefone = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
     private ?string $endereco = null;
 
     #[ORM\ManyToOne(inversedBy: 'alunos')]

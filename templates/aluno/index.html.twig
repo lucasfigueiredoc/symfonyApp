@@ -3,6 +3,41 @@
 {% block title %} Página de teste {% endblock %}
 
 {% block body %}
- {{ form(form) }}
+<a href="{{path('aluno_adicionar')}}" class="btn btn-primary">Adicionar Aluno</a>
+    <table class="table">
+        
+        <thead>
+        <tr>
+            <td>#</td>
+            <td scope="col">Curso</td>
+            <td scope="col">Duraçao</td>
+            <td scope="col">Publicação</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+            <tr>
+                <td scope="row">{{aluno.nome}}</td>
+                <td scope="row">{{aluno.dtnascimento|date('d-m-Y')}}</td>
+                <td>
+                <a href="{{path('aluno_editar',{id: aluno.id})}}" class="btn btn-primary">Editar</a>
+
+                </td>
+            </tr>
+            {% endfor %} 
+
+        </tbody>
+    </table>
+    {{ knp_pagination_render(alunos) }}
+
+    
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="flash-{{ label }}">
+          {{ message }}
+      </div>
+    {% endfor %}
+    {% endfor %}
+
 
 {% endblock %}
