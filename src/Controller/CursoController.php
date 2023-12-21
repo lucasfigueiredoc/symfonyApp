@@ -9,15 +9,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Curso;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\CursoRepository;
 
 class CursoController extends AbstractController
 
 {
-    #[Route('/curso', name: 'curso_index')]
-    public function index(CursoRepository $cursoRepository): Response{
+    #[Route('/', name: 'curso_index')]
+    public function index(Request $request,PaginatorInterface $pg, CursoRepository $cursoRepository): Response{
 
-        $data['cursos'] = $cursoRepository->findAll();
+        $query = $cursoRepository->findAll();
+
+        $data['cursos']  = $pg->paginate(
+            $query,
+            $request->query->get('page',1),
+            5
+        );
 
         return $this->render('curso/index.html.twig',$data);
 
@@ -53,6 +60,7 @@ class CursoController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($curso);
             $em->flush();
+            return $this->redirectToRoute('curso_index');
         }
 
         $data['form'] = $form;

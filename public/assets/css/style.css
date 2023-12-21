@@ -1,0 +1,58 @@
+.navigation {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.knp-pagination li.active {
+    background-color: #2980b9;
+}
+
+.knp-pagination li.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+
+/* Estilos padrão para todos os dispositivos */
+
+body {
+    font-size: 16px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    body {
+        font-size: 16px; /* Voltando ao tamanho padrão ou ajuste conforme necessário */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    body {
+        /* Adicione estilos específicos para telas maiores se necessário */
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    body {
+        /* Adicione estilos específicos para telas extra grandes se necessário */
+    }
+}
+
+/* styles.css */
+
+/* Estilize os botões do KnpPaginatorBundle como desejar */

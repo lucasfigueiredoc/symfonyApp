@@ -23,7 +23,7 @@ teste
                 <td>{{curso.datapublicacao|date('d-m-Y')}}</td>
                 <td>
                 <a href="{{path('curso_editar',{id: curso.id})}}" class="btn btn-primary">Editar</a>
-
+                <button id="btn-excluir"  data-id="{{ curso.id }}" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Excluir</a>
                 </td>
             </tr>
             {% endfor %} 
@@ -31,6 +31,44 @@ teste
         </tbody>
     </table>
     
+    <div class="navigation">
+        {{ knp_pagination_render(cursos) }}
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+                <!-- Cabeçalho do Modal -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Título do Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+    
+                <!-- Corpo do Modal -->
+                <div class="modal-body">
+                    <p>Deseja realmente excluir este aluno?.</p>
+                </div>
+    
+                <!-- Rodapé do Modal -->
+                <div class="modal-footer">
+                    <a id="excluir" class="btn btn-danger">Excluir</a>
+                    <button type="button" id="excluir" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
 
 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).on('click', '#btn-excluir', function (e) {
+        a = document.getElementById('excluir');
+        const id =  $(this).data('id');
+        a.setAttribute("href", "/aluno/excluir/" + id);
+    });
+</script>
 {% endblock %}

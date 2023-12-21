@@ -61,17 +61,18 @@ class AlunoController extends AbstractController
         $aluno = $alunoRepository->find($id);
         $form = $this->createForm(AlunoType::class, $aluno);
         $form->handleRequest($request);
+        $data['titulo'] = 'Editar aluno' ;
 
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($aluno);
             $em->flush();
 
+            return $this->redirectToRoute('aluno_index');
+
         }
 
         $data['form'] = $form;
-
-
-        return $this->renderForm('aluno/index.html.twig',$data);
+        return $this->renderForm('aluno/form.html.twig',$data);
 
     }
 

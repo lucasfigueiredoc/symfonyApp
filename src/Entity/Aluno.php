@@ -39,6 +39,9 @@ class Aluno
     #[ORM\JoinColumn(nullable: false)]
     private ?Curso $Curso = null;
 
+    #[ORM\Column]
+    private ?bool $genero = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,6 +103,18 @@ class Aluno
     public function setCurso(?Curso $Curso): static
     {
         $this->Curso = $Curso;
+
+        return $this;
+    }
+
+    public function isGenero(): ?bool
+    {
+        return $this->genero;
+    }
+
+    public function setGenero(bool $genero): static
+    {
+        $this->genero = $genero;
 
         return $this;
     }

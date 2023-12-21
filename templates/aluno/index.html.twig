@@ -9,6 +9,7 @@
         <thead>
         <tr>
             <td>#</td>
+            <td scope="col">ID</td>
             <td scope="col">Curso</td>
             <td scope="col">Duraçao</td>
             <td scope="col">Publicação</td>
@@ -17,20 +18,51 @@
         <tbody>
             {% for aluno in alunos %}
             <tr>
+                <td scope="row">{{aluno.id}}</td>
                 <td scope="row">{{aluno.nome}}</td>
                 <td scope="row">{{aluno.dtnascimento|date('d-m-Y')}}</td>
                 <td>
                 <a href="{{path('aluno_editar',{id: aluno.id})}}" class="btn btn-primary">Editar</a>
-
+                <a id="btn-excluir"  data-id="{{ aluno.id }}" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Excluir</a>
                 </td>
-            </tr>
+            </tr> 
             {% endfor %} 
 
         </tbody>
     </table>
-    {{ knp_pagination_render(alunos) }}
+    <div class="navigation">
+        {{ knp_pagination_render(alunos     ) }}
+    </div>
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+  
+              <!-- Cabeçalho do Modal -->
+              <div class="modal-header">
+                  <h4 class="modal-title">Título do Modal</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+  
+              <!-- Corpo do Modal -->
+              <div class="modal-body">
+                  <p>Deseja realmente excluir este aluno?.</p>
+              </div>
+  
+              <!-- Rodapé do Modal -->
+              <div class="modal-footer">
+                  
+                  <a id="excluir" class="btn btn-danger">Excluir</a>
+                  <a type="button" class="btn btn-secondary" data-dismiss="modal">Sair</a>
+              </div>
+  
+          </div>
+      </div>
+  </div>
+  
 
-    
+
+
+
     {% for label, messages in app.flashes %}
     {% for message in messages %}
       <div class="flash-{{ label }}">
@@ -41,3 +73,15 @@
 
 
 {% endblock %}
+
+
+{% block javascripts %}
+<script>
+    $(document).on('click', '#btn-excluir', function (e) {
+        a = document.getElementById('excluir');
+        const id =  $(this).data('id');
+        a.setAttribute("href", "/aluno/excluir/" + id);
+    });
+</script>
+{% endblock %}
+

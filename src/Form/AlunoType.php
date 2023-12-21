@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\Entity\Curso;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AlunoType extends AbstractType
@@ -25,6 +26,14 @@ class AlunoType extends AbstractType
             ->add('curso', EntityType::class,[
                 'class' => Curso::class,
                 'choice_label' => 'nomecurso' 
+            ])
+
+            ->add('genero', ChoiceType::class, [
+                'label' => 'Ativo',
+                'choices' => [
+                    'M' => true,
+                    'H' => false,
+                ],
             ])
             ->add('Salvar', SubmitType::class);
  
