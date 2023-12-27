@@ -21,6 +21,16 @@ class AlunoRepository extends ServiceEntityRepository
         parent::__construct($registry, Aluno::class);
     }
 
+    public function findAlunoByLikeNome($nome)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.nome LIKE :nome')
+            ->setParameter('nome', "%$nome")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Aluno[] Returns an array of Aluno objects
 //     */

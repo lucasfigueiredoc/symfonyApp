@@ -16,6 +16,13 @@ class AlunoController extends AbstractController
     #[Route('/aluno', name: 'aluno_index')]
     public function index(Request $request,AlunoRepository $alunoRepository, PaginatorInterface $pg): Response{
 
+        $nomeAluno =  $request->query->get('nome');
+
+        $data['alunos'] = is_null($nomeAluno)
+                        ? $alunoRepository->findAll()
+                        : $alunoRepository->findAlunoByLikeNome($nomeAluno);
+          
+        $data['nome'] = $nomeAluno;
         $query = $alunoRepository->findAll();
 
         $data['alunos'] = $pg->paginate(
